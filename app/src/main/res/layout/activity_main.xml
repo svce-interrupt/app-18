@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:id="@+id/activityMain"
+    android:clickable="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:id="@+id/toolbar"
+            app:titleTextColor="#262626"
+            android:theme="@style/ToolbarColor"/>
+
+    </android.support.design.widget.AppBarLayout>
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/Container"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:padding="24dp"
+            android:layout_gravity="center"
+            android:textColor="#262626"
+            android:textSize="26sp"/>
+
+    </FrameLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="id_activityScreenTitles">
+
+        <item>Home</item>
+        <item>Events</item>
+        <item>About Us</item>
+        <item>ChatBot</item>
+        <item/>
+        <item>Logout</item>
+
+    </string-array>
+
+    <array name="id_activityScreenIcons">
+//Left for icons
+        <item>@drawable/ic_home_black_24dp</item>
+        <item>@drawable/ic_event_black_24dp</item>
+        <item>@drawable/ic_info_outline_black_24dp</item>
+        <item>@drawable/ic_chat_black_24dp</item>
+        <item>0</item>
+        <item>@drawable/ic_account_circle_black_24dp</item>
+
+    </array>
+
+</resources>
