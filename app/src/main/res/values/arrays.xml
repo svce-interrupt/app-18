@@ -13,7 +13,7 @@
     </string-array>
 
     <array name="id_activityScreenIcons">
-//Left for icons
+
         <item>@drawable/ic_home_black_24dp</item>
         <item>@drawable/ic_event_black_24dp</item>
         <item>@drawable/ic_info_outline_black_24dp</item>

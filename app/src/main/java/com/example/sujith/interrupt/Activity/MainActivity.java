@@ -1,6 +1,5 @@
 package com.example.sujith.interrupt.Activity;
 
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;

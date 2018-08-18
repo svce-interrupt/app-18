@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:background="#ffffff">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="11dp"
+        android:layout_margin="29dp"
+        android:text="Register"
+        android:textColor="#262626"
+        android:textSize="26sp" />
+
+
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="10dp"
+        android:text="Name"
+        android:layout_below="@id/title"
+        android:textColor="#262626"
+        android:textSize="26sp" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_below="@+id/name"
+        android:id="@+id/s1"/>
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/name"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/s1"
+        android:text="E-mail"
+        android:textColor="#262626"
+        android:textSize="26sp" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_below="@+id/email"
+        android:id="@+id/s2"/>
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/s2"
+        android:layout_alignStart="@+id/name"
+        android:layout_marginTop="25dp"
+        android:text="Phone"
+        android:textColor="#262626"
+        android:textSize="26sp" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_below="@+id/phone"
+        android:id="@+id/s3"/>
+
+    <TextView
+        android:id="@+id/college"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/name"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/s3"
+        android:text="College"
+        android:textColor="#262626"
+        android:textSize="26sp" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_below="@+id/college"
+        android:id="@+id/s4"/>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/s4"
+        android:text="Submit"
+        android:textColor="#262626"
+        android:textSize="26sp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/name"
+        android:layout_alignStart="@+id/submit"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Name"
+        android:textColor="#bdbdbd"
+        android:layout_toRightOf="@+id/name"/>
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/submit"
+        android:layout_alignTop="@+id/email"
+        android:ems="10"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:layout_toRightOf="@+id/email"/>
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/submit"
+        android:layout_alignTop="@+id/phone"
+        android:ems="10"
+        android:inputType="phone"
+        android:textColor="#bdbdbd"
+        android:hint="Phone"
+        android:layout_toRightOf="@+id/phone"/>
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/college"
+        android:layout_alignStart="@+id/submit"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="College Name"
+        android:textColor="#bdbdbd"
+        android:layout_toRightOf="@+id/college" />
+
+
+</RelativeLayout>
