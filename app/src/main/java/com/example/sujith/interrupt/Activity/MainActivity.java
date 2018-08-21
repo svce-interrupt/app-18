@@ -1,5 +1,6 @@
 package com.example.sujith.interrupt.Activity;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
@@ -90,32 +91,30 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                         .beginTransaction()
                         .replace(R.id.activityMain, new Home())
                         .commit();
-                Toast.makeText(this, "Home", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
                 break;
             case POS_EVENTS :
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.activityMain, new Events())
-                        .commit();
-                Toast.makeText(this,"Events",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this,Event.class);
+                startActivity(intent);
+                Toast.makeText(this,"Events",Toast.LENGTH_SHORT).show();
                 break;
             case POS_ABOUT_US :
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.activityMain, new AboutUs())
                         .commit();
-                Toast.makeText(this,"About Us",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"About Us",Toast.LENGTH_SHORT).show();
                 break;
             case POS_CHATBOT :
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.activityMain, new ChatBot())
                         .commit();
-                Toast.makeText(this,"ChatBot",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"ChatBot",Toast.LENGTH_SHORT).show();
                 break;
             case POS_LOGOUT :
                 finish();
-                Toast.makeText(this,"You are logged out",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"You are logged out",Toast.LENGTH_SHORT).show();
                 break;
         }
 
