@@ -2,10 +2,11 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_Event"
+    android:id="@+id/Event_frag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Event$PlaceholderFragment">
+    tools:context=".Activity.Event$PlaceholderFragment"
+    android:visibility="visible">
 
     <RelativeLayout
         android:layout_width="match_parent"

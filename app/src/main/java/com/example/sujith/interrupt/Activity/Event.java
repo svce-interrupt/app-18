@@ -27,12 +27,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.widget.Toast;
 
 import com.example.sujith.interrupt.Fragment.AboutUs;
 import com.example.sujith.interrupt.Fragment.ChatBot;
+import com.example.sujith.interrupt.Fragment.Events;
 import com.example.sujith.interrupt.Fragment.EventsFrag.PitchPerfect;
 import com.example.sujith.interrupt.Fragment.Home;
 import com.example.sujith.interrupt.Fragment.Text;
@@ -48,7 +50,7 @@ import java.util.Arrays;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Event extends AppCompatActivity{
+public class Event extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener{
 
     private static final int POS_HOME = 0;
     private static final int POS_EVENTS =1;
@@ -92,6 +94,26 @@ public class Event extends AppCompatActivity{
                 .withMenuLayout(R.layout.menu_left_drawer)
                 .inject();
 
+        screenIcons = loadScreenIcons();
+        screenTitle = loadScreenTitles();
+        //This part...!!
+        DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(
+                createItemFor(POS_HOME),
+                createItemFor(POS_EVENTS),
+                createItemFor(POS_ABOUT_US),
+                createItemFor(POS_CHATBOT),
+                new SpaceItem(48),
+                createItemFor(POS_LOGOUT)
+        ));
+        adapter.setListener(this);
+
+        RecyclerView list = findViewById(R.id.list);
+        list.setNestedScrollingEnabled(false);
+        list.setLayoutManager(new LinearLayoutManager(this));
+        list.setAdapter(adapter);
+
+        adapter.setSelected(POS_EVENTS);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +125,90 @@ public class Event extends AppCompatActivity{
         });
 
 
+    }
+    @Override
+    public void onItemSelected(int position) {
+        switch(position){
+            case POS_HOME :
+//                getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.container, new Home())
+//                        .commit();
+                Intent intent = new Intent(Event.this, MainActivity.class);
+                startActivity(intent);
+                Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
+                break;
+
+            case POS_EVENTS :
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_Event, new Events())
+                        .detach(new Events())
+                        .commit();
+
+                Toast.makeText(this,"Events",Toast.LENGTH_SHORT).show();
+                break;
+
+
+            case POS_ABOUT_US :
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_Event, new AboutUs())
+                        .commit();
+                Toast.makeText(this,"About Us",Toast.LENGTH_SHORT).show();
+                break;
+            case POS_CHATBOT :
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_Event, new ChatBot())
+                        .commit();
+                Toast.makeText(this,"ChatBot",Toast.LENGTH_SHORT).show();
+                break;
+            case POS_LOGOUT :
+                finish();
+                Toast.makeText(this,"You are logged out",Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        slidingRootNav.closeMenu();
+        android.app.Fragment selectedScreen = Text.createFor(screenTitle[position]);
+        showFragment(selectedScreen);
+    }
+
+
+    private void showFragment(android.app.Fragment fragment){
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+    }
+    private DrawerItem createItemFor(int position) {
+        return new SimpleItem(screenIcons[position], screenTitle[position])
+                .withIconTint(color(R.color.textSecondaryColorDark))
+                .withTextTint(color(R.color.colorPrimary))
+                .withSelectedIconTint(color(R.color.colorAccent))
+                .withSelectedTextTint(color(R.color.colorAccent));
+    }
+    private  String[] loadScreenTitles(){
+        return getResources().getStringArray(R.array.id_activityScreenTitles);
+    }
+
+    private Drawable[] loadScreenIcons(){
+        TypedArray ta = getResources().obtainTypedArray(R.array.id_activityScreenIcons);
+        Drawable[] icons = new Drawable[ta.length()];
+        for(int i=0; i < ta.length(); i++){
+            int id = ta.getResourceId(i,0);
+            if(id != 0){
+                icons[i] = ContextCompat.getDrawable(this, id);
+            }
+        }
+        ta.recycle();
+        return icons;
+    }
+
+    @ColorInt
+    private int color(@ColorRes int res){
+        return ContextCompat.getColor(this, res);
     }
 
 
@@ -119,31 +225,7 @@ public class Event extends AppCompatActivity{
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        CircleImageView imageView = (CircleImageView) findViewById(R.id.image);
-        switch(id){
-            case 1: {
-                imageView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Event.this, PitchPerfect.class);
-                    }
-                });
-                break;
-            }
-            case 2: {
-                imageView.setImageResource(R.drawable.silicon);
-                break;
-            }
-            case 3: {
-                imageView.setImageResource(R.drawable.siliconchar);
-                break;
-            }
-            case 11: {
 
-                break;
-            }
-            default: {break;}
-        }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -187,6 +269,7 @@ public class Event extends AppCompatActivity{
 
             ImageView leftArrow = rootView.findViewById(R.id.left);
             ImageView rightArrow = rootView.findViewById(R.id.right);
+            RelativeLayout relativeLayout = rootView.findViewById(R.id.Event_frag);
 
             CircleImageView imageView = rootView.findViewById(R.id.image);
             switch(getArguments().getInt(ARG_SECTION_NUMBER)){
@@ -205,6 +288,7 @@ public class Event extends AppCompatActivity{
                             fragmentTransaction.commit();
                         }
                     });
+
                     break;
                 }
                 case 2: {
