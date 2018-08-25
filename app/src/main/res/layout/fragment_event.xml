@@ -1,98 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/Event_frag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Event$PlaceholderFragment"
-    android:visibility="visible">
+    android:background="#ffffff"
+    android:focusable="true"
+    android:id="@+id/dummy">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/EventTitle"
+        android:textSize="40sp"
+        android:layout_margin="30dp"
+        android:textStyle="bold" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/EventIcon"
+        android:layout_margin="20dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#bdbdbd"
+        android:layout_below="@id/EventIcon"
+        android:id="@+id/view1"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <!--<TextView
-            android:id="@+id/section_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_centerInParent="true" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view1"
+        android:layout_margin="10dp"
+        android:id="@+id/rel1">
 
         <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_event_note_black_24dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/note"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:id="@+id/image"
-            android:layout_above="@+id/section_label"
-            android:layout_centerHorizontal="true"/>-->
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/image"
-            android:layout_centerHorizontal="true"
-            android:layout_above="@+id/evedes"
-            android:layout_marginBottom="30dp"/>
-        <!--android:layout_above="@+id/section_label"-->
-
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_chevron_left_black_24dp"
-            android:layout_toStartOf="@+id/image"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/left"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="105dp"/>
-
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_chevron_right_black_24dp"
-            android:layout_toEndOf="@+id/image"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/right"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="105dp"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/evereg"
-            android:layout_below="@+id/everules"
-            android:layout_marginBottom="30dp"
-            android:layout_centerHorizontal="true"
-            android:hint="Registration"
-            android:textColorHighlight="#32BD29"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/evedes"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="30dp"
-            android:layout_centerHorizontal="true"
-            android:hint="Description"
-            android:textColorHighlight="#32BD29"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/everules"
-            android:layout_below="@+id/evedes"
-            android:layout_marginBottom="30dp"
-            android:layout_centerHorizontal="true"
-            android:hint="Rules"
-            android:textColorHighlight="#32BD29"/>
+            android:text="Event Place"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/note"
+            android:layout_marginStart="150dp"
+            android:textSize="30sp"/>
 
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#bdbdbd"
+        android:layout_below="@id/rel1"
+        android:id="@+id/view2"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view2"
+        android:layout_margin="10dp"
+        android:id="@+id/rel2">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_phone_black_24dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/phone"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone No."
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/phone"
+            android:layout_marginStart="150dp"
+            android:textSize="30sp"/>
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#bdbdbd"
+        android:layout_below="@id/rel2"
+        android:id="@+id/view3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/view3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/dots"/>
+
+    </LinearLayout>
+
 
 
 </RelativeLayout>

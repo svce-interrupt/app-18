@@ -1,5 +1,4 @@
-package com.example.sujith.interrupt.Fragment;
-
+package com.example.sujith.interrupt.Fragment.EventsFrag;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,13 +8,9 @@ import android.view.ViewGroup;
 
 import com.example.sujith.interrupt.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class ChatBot extends Fragment {
+public class Event4 extends Fragment {
 
-
-    public ChatBot() {
+    public Event4() {
         // Required empty public constructor
     }
 
@@ -24,7 +19,6 @@ public class ChatBot extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat_bot, container, false);
+        return inflater.inflate(R.layout.fragment_event4, container, false);
     }
-
 }

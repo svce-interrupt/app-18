@@ -4,11 +4,11 @@
     <string-array name="id_activityScreenTitles">
 
         <item>Home</item>
-        <item>Events</item>
-        <item>About Us</item>
-        <item>ChatBot</item>
+        <item>Dashboard</item>
+        <item>Contact</item>
+        <!--<item>Contact</item>-->
         <item/>
-        <item>Logout</item>
+        <item>Profile</item>
 
     </string-array>
 
@@ -17,7 +17,7 @@
         <item>@drawable/ic_home_black_24dp</item>
         <item>@drawable/ic_event_black_24dp</item>
         <item>@drawable/ic_info_outline_black_24dp</item>
-        <item>@drawable/ic_chat_black_24dp</item>
+        <!--<item>@drawable/ic_chat_black_24dp</item>-->
         <item>0</item>
         <item>@drawable/ic_account_circle_black_24dp</item>
 

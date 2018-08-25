@@ -21,6 +21,16 @@ android {
         }
     }
     productFlavors {
+
+        dev {
+            minSdkVersion 23
+            versionNameSuffix "-dev"
+            applicationIdSuffix ".dev"
+        }
+
+        prod {
+            flavorDimensions "versionCode"
+        }
     }
 }
 
@@ -40,5 +50,6 @@ dependencies {
     implementation files('libs/CircleImageView-master/gradle/wrapper/gradle-wrapper.jar')
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.github.jgabrielfreitas:BlurImageView:1.0.1'
+    implementation 'com.r0adkll:slidableactivity:2.0.6'
 
 }

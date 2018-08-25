@@ -4,15 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:focusable="true"
-    android:id="@+id/pp">
+    android:focusable="true">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Pitch Perfect"
+        android:text="Event 4"
         android:textSize="40sp"
         android:layout_margin="30dp"
         android:textStyle="bold" />

@@ -1,6 +1,5 @@
 package com.example.sujith.interrupt.Activity;
 
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
@@ -12,14 +11,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.app.Fragment;
+import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.Arrays;
 
-import com.example.sujith.interrupt.Fragment.AboutUs;
-import com.example.sujith.interrupt.Fragment.ChatBot;
-import com.example.sujith.interrupt.Fragment.Events;
+import com.example.sujith.interrupt.Fragment.Contact;
+import com.example.sujith.interrupt.Fragment.Dashboard;
 import com.example.sujith.interrupt.Fragment.Home;
+import com.example.sujith.interrupt.Fragment.Profile;
 import com.example.sujith.interrupt.Menu.DrawerAdapter;
 import com.example.sujith.interrupt.Menu.DrawerItem;
 import com.example.sujith.interrupt.Menu.SimpleItem;
@@ -32,10 +34,10 @@ import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener {
 
     private static final int POS_HOME = 0;
-    private static final int POS_EVENTS =1;
-    private static final int POS_ABOUT_US =2;
-    private static final int POS_CHATBOT =3;
-    private static final int POS_LOGOUT = 5;
+    private static final int POS_DASHBOARD =1;
+    private static final int POS_CONTACT =2;
+//    private static final int POS_TRANSPORT =3;
+    private static final int POS_PROFILE = 4;
 
     private String[] screenTitle;
     private Drawable[] screenIcons;
@@ -44,13 +46,15 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Home");
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ImageView imageView = (ImageView) findViewById(R.id.MenuImage);
+        imageView.setImageResource(R.drawable.ic_menu_black_24dp);
 
 
         slidingRootNav = new SlidingRootNavBuilder(this)
@@ -67,11 +71,11 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         //This part...!!
         DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(
                 createItemFor(POS_HOME),
-                createItemFor(POS_EVENTS),
-                createItemFor(POS_ABOUT_US),
-                createItemFor(POS_CHATBOT),
+                createItemFor(POS_DASHBOARD),
+//                createItemFor(POS_TRANSPORT),
+                createItemFor(POS_CONTACT),
                 new SpaceItem(48),
-                createItemFor(POS_LOGOUT)
+                createItemFor(POS_PROFILE)
         ));
         adapter.setListener(this);
 
@@ -83,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         adapter.setSelected(POS_HOME);
     }
 
+
     @Override
     public void onItemSelected(int position) {
         switch(position){
@@ -93,28 +98,26 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                         .commit();
                 Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
                 break;
-            case POS_EVENTS :
-                Intent intent = new Intent(MainActivity.this,Event.class);
-                startActivity(intent);
-                Toast.makeText(this,"Events",Toast.LENGTH_SHORT).show();
-                break;
-            case POS_ABOUT_US :
+            case POS_DASHBOARD :
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.activityMain, new AboutUs())
+                        .replace(R.id.activityMain, new Dashboard())
                         .commit();
-                Toast.makeText(this,"About Us",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Dashboard",Toast.LENGTH_SHORT).show();
                 break;
-            case POS_CHATBOT :
+            case POS_CONTACT :
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.activityMain, new ChatBot())
+                        .replace(R.id.activityMain, new Contact())
                         .commit();
-                Toast.makeText(this,"ChatBot",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Contact",Toast.LENGTH_SHORT).show();
                 break;
-            case POS_LOGOUT :
-                finish();
-                Toast.makeText(this,"You are logged out",Toast.LENGTH_SHORT).show();
+            case POS_PROFILE :
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activityMain, new Profile())
+                        .commit();
+                Toast.makeText(this,"Profile",Toast.LENGTH_SHORT).show();
                 break;
         }
 
