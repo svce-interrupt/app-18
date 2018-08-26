@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.sujith.interrupt"
+        applicationId "com.lazytomatostudios.interrupt18"
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
