@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 .withMenuLayout(R.layout.menu_left_drawer)
                 .inject();
 
-
         screenIcons = loadScreenIcons();
         screenTitle = loadScreenTitles();
         //This part...!!

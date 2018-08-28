@@ -1,13 +1,18 @@
 package com.example.sujith.interrupt.Fragment.EventsFrag;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.view.InputDevice;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.sujith.interrupt.Activity.EventActivity;
 import com.example.sujith.interrupt.R;
 
 
@@ -33,16 +38,18 @@ public class Rules extends Fragment{
         View view = inflater.inflate(R.layout.fragment_rules, container, false);
         TextView textView = view.findViewById(R.id.Rules);
         textView.setText(rules);
-        final RelativeLayout relativeLayout = view.findViewById(R.id.rel3);
         RelativeLayout relative = view.findViewById(R.id.real3);
         relative.setClipToOutline(true);
+        final RelativeLayout relativeLayout = view.findViewById(R.id.rela3);
 
 
-        relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
+        ImageButton imageButton = view.findViewById(R.id.close);
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
+            public void onClick(View v) {
                 relativeLayout.setVisibility(View.GONE);
-                return true;
+                getChildFragmentManager()
+                        .popBackStack();
             }
         });
 

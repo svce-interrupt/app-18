@@ -1,7 +1,11 @@
 package com.example.sujith.interrupt.Activity;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.transition.Fade;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -10,19 +14,35 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sujith.interrupt.Fragment.EventsFrag.Description;
 import com.example.sujith.interrupt.R;
+import com.goka.blurredgridmenu.GridMenu;
+import com.goka.blurredgridmenu.GridMenuFragment;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EventActivity extends AppCompatActivity {
+
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -33,11 +53,14 @@ public class EventActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    private GestureDetector gestureDetector;
+    private DotsIndicator dotsIndicator;
 
     /**
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +73,19 @@ public class EventActivity extends AppCompatActivity {
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
+
+
+
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        dotsIndicator = (DotsIndicator) findViewById(R.id.dots_indicator);
+        dotsIndicator.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        dotsIndicator.setViewPager(mViewPager);
+
+        PlaceholderFragment placeholderFragment = new PlaceholderFragment();
+        placeholderFragment.view(mViewPager);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +97,8 @@ public class EventActivity extends AppCompatActivity {
         });
 
     }
+
+
 
 
 //    @Override
@@ -97,8 +132,11 @@ public class EventActivity extends AppCompatActivity {
          * The fragment argument representing the section number for this
          * fragment.
          */
-        String myString;
-        private static final String ARG_SECTION_NUMBER = "section_number";
+        private ImageButton button;
+        public static final String ARG_SECTION_NUMBER = "section_number";
+        public static int num;
+        private GridMenuFragment mGridMenuFragment;
+        private static ViewPager viewPager;
 
         public PlaceholderFragment() {
         }
@@ -109,8 +147,8 @@ public class EventActivity extends AppCompatActivity {
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
-//            Fade fade = new Fade();
-//            fade.setDuration(500);
+            Fade fade = new Fade();
+            fade.setDuration(500);
 //            Slide slideLeft = new Slide(Gravity.START);
 //            slideLeft.setDuration(600);
 //            Explode explode = new Explode();
@@ -124,6 +162,13 @@ public class EventActivity extends AppCompatActivity {
             return fragment;
         }
 
+//        public static void getNumber(int number){
+//            num = number;
+//        }
+        public void view(ViewPager mViewPager){
+            viewPager = mViewPager;
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -131,33 +176,91 @@ public class EventActivity extends AppCompatActivity {
 
             TextView title = rootView.findViewById(R.id.EventTitle);
             CircleImageView icon = rootView.findViewById(R.id.EventIcon);
-            RelativeLayout relativeLayout = rootView.findViewById(R.id.dummy);
+            RelativeLayout relativeLayout = rootView.findViewById(R.id.rel2);
+            mGridMenuFragment = GridMenuFragment.newInstance(R.drawable.silicon);
+            button = rootView.findViewById(R.id.context_menu1);
+//            button.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View v, MotionEvent event) {
+//                    registerForContextMenu(button);
+//                    return false;
+//                }
+//            });
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentTransaction tx = getChildFragmentManager().beginTransaction();
+                    tx.replace(R.id.dummy, mGridMenuFragment);
+                    tx.addToBackStack(null);
+                    tx.commit();
+                }
+            });
+
+            setupGridMenu();
+            mGridMenuFragment.setOnClickMenuListener(new GridMenuFragment.OnClickMenuListener() {
+                @Override
+                public void onClickMenu(GridMenu gridMenu, int position) {
+//                    Toast.makeText(getActivity(), "Title:" + gridMenu.getTitle() + ", Position:" + position,
+//                            Toast.LENGTH_SHORT).show();
+                    switch (position){
+                        case 0: {
+                            viewPager.setCurrentItem(0,true);
+                            break;
+                        }
+                        case 1: {
+                            viewPager.setCurrentItem(1,true);
+                            break;
+                        }
+                        case 2:{
+                            viewPager.setCurrentItem(2,true);
+                            break;
+                        }
+                        case 3:{
+                            viewPager.setCurrentItem(3,true);
+                            break;
+                        }
+                        case 4:{
+                            viewPager.setCurrentItem(4,true);
+                            break;
+                        }
+                        case 5:{
+                            viewPager.setCurrentItem(5,true);
+                            break;
+                        }
+                        case 6:{
+                            viewPager.setCurrentItem(6,true);
+                            break;
+                        }
+                        case 7:{
+                            viewPager.setCurrentItem(7,true);
+                            break;
+                        }
+                        case 8:{
+                            viewPager.setCurrentItem(8,true);
+                            break;
+                        }
+                        case 9:{
+                            viewPager.setCurrentItem(9,true);
+                            break;
+                        }
+                        case 10:{
+                            viewPager.setCurrentItem(10,true);
+                            break;
+                        }
+                    }
+                }
+            });
+
 
             switch(getArguments().getInt(ARG_SECTION_NUMBER)){
+
                 case 1: {
                     title.setText("Pitch Perfect");
                     icon.setImageResource(R.drawable.ic_launcher_background);
-                    relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
+                    relativeLayout.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public boolean onLongClick(View v) {
-                            Description fragment = new Description();
-                            fragment.setDes("Hello this is the description","Hello this are the Rules");
-                            getChildFragmentManager()
-                                    .beginTransaction()
-                                    .setCustomAnimations(R.anim.slide_up,R.anim.slide_down)
-                                    .replace(R.id.dummy,new Description(),"des")
-                                    .commit();
-                            return true;
-                        }
-                    });
-                    break;
-                }
-                case 2: {
-                    title.setText("Event 2");
-                    icon.setImageResource(R.drawable.silicon);
-                    relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(View v) {
+                        public void onClick(View v) {
                             Description fragment = new Description();
                             fragment.setDes("Hello this is the description","Hello this are the Rules");
                             getChildFragmentManager()
@@ -165,7 +268,23 @@ public class EventActivity extends AppCompatActivity {
                                     .setCustomAnimations(R.anim.slide_up,R.anim.slide_down)
                                     .replace(R.id.dummy,new Description())
                                     .commit();
-                            return true;
+                        }
+                    });
+                    break;
+                }
+                case 2: {
+                    title.setText("Event 2");
+                    icon.setImageResource(R.drawable.silicon);
+                    relativeLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Description fragment = new Description();
+                            fragment.setDes("Hello this is the description","Hello this are the Rules");
+                            getChildFragmentManager()
+                                    .beginTransaction()
+                                    .setCustomAnimations(R.anim.slide_up,R.anim.slide_down)
+                                    .replace(R.id.dummy,new Description())
+                                    .commit();
                         }
                     });
                     break;
@@ -173,16 +292,124 @@ public class EventActivity extends AppCompatActivity {
                 case 11: {
                     title.setText("Event 11");
                     icon.setImageResource(R.drawable.siliconchar);
+                    relativeLayout.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Description fragment = new Description();
+                            fragment.setDes("Hello this is the description","Hello this are the Rules");
+                            getChildFragmentManager()
+                                    .beginTransaction()
+                                    .setCustomAnimations(R.anim.slide_up,R.anim.slide_down)
+                                    .replace(R.id.dummy,new Description())
+                                    .commit();
+                        }
+                    });
                     break;
                 }
 
             }
+
+//            Bundle bundle = new Bundle();
+//            bundle.putInt(ARG_SECTION_NUMBER,getArguments().getInt(ARG_SECTION_NUMBER));
             return rootView;
         }
-        public String description(){
-            return myString;
+//        public String description(){
+//            return myString;
+//        }
+
+        private void setupGridMenu() {
+            List<GridMenu> menus = new ArrayList<>();
+            menus.add(new GridMenu("Pitch Perfect", R.drawable.ic_event_note_black_24dp));
+            menus.add(new GridMenu("Event 2", R.drawable.ic_event_note_black_24dp));
+            menus.add(new GridMenu("Event 3", R.drawable.ic_event_note_black_24dp));
+            menus.add(new GridMenu("Event 4", R.drawable.ic_event_note_black_24dp));
+            menus.add(new GridMenu("Event 5", R.drawable.ic_event_note_black_24dp));
+            menus.add(new GridMenu("Event 6", R.drawable.ic_event_note_black_24dp));
+            menus.add(new GridMenu("Event 7", R.drawable.ic_event_note_black_24dp));
+            menus.add(new GridMenu("Event 8", R.drawable.ic_event_note_black_24dp));
+            menus.add(new GridMenu("Event 9", R.drawable.ic_event_note_black_24dp));
+            menus.add(new GridMenu("Event 10", R.drawable.ic_event_note_black_24dp));
+            menus.add(new GridMenu("Event 11", R.drawable.ic_event_note_black_24dp));
+
+            mGridMenuFragment.setupMenu(menus);
+        }
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (0 == getSupportFragmentManager().getBackStackEntryCount()) {
+            super.onBackPressed();
+        } else {
+            getSupportFragmentManager().popBackStack();
         }
     }
+
+//    @Override
+//    public boolean onContextItemSelected(final MenuItem item) {
+//
+//        setFinishOnTouchOutside(true);
+//        switch(item.getItemId()){
+//            case R.id.action_event1: {
+//                mViewPager.setCurrentItem(0,true);
+//                break;
+//            }
+//            case R.id.action_event2: {
+//                mViewPager.setCurrentItem(1,true);
+//                break;
+//            }
+//            case R.id.action_event3:{
+//                mViewPager.setCurrentItem(2,true);
+//                break;
+//            }
+//            case R.id.action_event4:{
+//                mViewPager.setCurrentItem(3,true);
+//                break;
+//            }
+//            case R.id.action_event5:{
+//                mViewPager.setCurrentItem(4,true);
+//                break;
+//            }
+//            case R.id.action_event6:{
+//                mViewPager.setCurrentItem(5,true);
+//                break;
+//            }
+//            case R.id.action_event7:{
+//                mViewPager.setCurrentItem(6,true);
+//                break;
+//            }
+//            case R.id.action_event8:{
+//                mViewPager.setCurrentItem(7,true);
+//                break;
+//            }
+//            case R.id.action_event9:{
+//                mViewPager.setCurrentItem(8,true);
+//                break;
+//            }
+//            case R.id.action_event10:{
+//                mViewPager.setCurrentItem(9,true);
+//                break;
+//            }
+//            case R.id.action_event11:{
+//                mViewPager.setCurrentItem(10,true);
+//                break;
+//            }
+//
+//
+//        }
+//
+//        return super.onContextItemSelected(item);
+//    }
+//
+//    @Override
+//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.context_menu,menu);
+//
+//    }
 
 
     /**

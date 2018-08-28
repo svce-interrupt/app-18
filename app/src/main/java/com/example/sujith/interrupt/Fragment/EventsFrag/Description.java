@@ -1,14 +1,18 @@
 package com.example.sujith.interrupt.Fragment.EventsFrag;
 
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.transition.TransitionSet;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.sujith.interrupt.Activity.EventActivity;
 import com.example.sujith.interrupt.R;
 
 
@@ -19,6 +23,8 @@ public class Description extends Fragment {
 
     public static String des = null;
     public static String rules = null;
+
+    Bitmap bitmap;
     public Description(){
 
     }
@@ -31,6 +37,7 @@ public class Description extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_description, container, false);
         RelativeLayout relative = view.findViewById(R.id.real2);
@@ -52,6 +59,17 @@ public class Description extends Fragment {
                 return true;
             }
         });
+        ImageButton imageButton = view.findViewById(R.id.close);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                relativeLayout.setVisibility(View.GONE);
+                getChildFragmentManager()
+                        .popBackStack();
+            }
+        });
+
+
         return view;
     }
 

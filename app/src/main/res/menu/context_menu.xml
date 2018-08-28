@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_event1"
+        android:title="Event1"/>
+
+    <item
+        android:id="@+id/action_event2"
+        android:title="Event2"/>
+
+    <item
+        android:id="@+id/action_event3"
+        android:title="Event3"/>
+
+    <item
+        android:id="@+id/action_event4"
+        android:title="Event4"/>
+
+    <item
+        android:id="@+id/action_event5"
+        android:title="Event5"/>
+
+    <item
+        android:id="@+id/action_event6"
+        android:title="Event6"/>
+
+    <item
+        android:id="@+id/action_event7"
+        android:title="Event7"/>
+
+    <item
+        android:id="@+id/action_event8"
+        android:title="Event8"/>
+
+    <item
+        android:id="@+id/action_event9"
+        android:title="Event9"/>
+
+    <item
+        android:id="@+id/action_event10"
+        android:title="Event10"/>
+
+    <item
+        android:id="@+id/action_event11"
+        android:title="Event11"/>
+
+</menu>
