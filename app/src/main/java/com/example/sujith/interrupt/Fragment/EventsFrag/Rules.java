@@ -1,6 +1,5 @@
 package com.example.sujith.interrupt.Fragment.EventsFrag;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +20,7 @@ public class Rules extends Fragment{
 
     public static String rules = null;
 
+
     public Rules() {
         // Required empty public constructor
     }
@@ -29,6 +29,8 @@ public class Rules extends Fragment{
     public void setRules(String string){
         rules = string;
     }
+
+
 
 
     @Override
@@ -47,10 +49,8 @@ public class Rules extends Fragment{
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                relativeLayout.setVisibility(View.GONE);
-                getChildFragmentManager()
-                        .popBackStack();
-            }
+                    relativeLayout.setVisibility(View.GONE);
+                }
         });
 
         return view;

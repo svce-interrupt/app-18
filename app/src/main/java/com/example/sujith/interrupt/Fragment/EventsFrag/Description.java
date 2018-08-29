@@ -23,8 +23,6 @@ public class Description extends Fragment {
 
     public static String des = null;
     public static String rules = null;
-
-    Bitmap bitmap;
     public Description(){
 
     }
@@ -45,9 +43,10 @@ public class Description extends Fragment {
         TextView textView = view.findViewById(R.id.Des);
         textView.setText(des);
         final RelativeLayout relativeLayout = view.findViewById(R.id.rules);
-        relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
+        final TextView RulesText = view.findViewById(R.id.rText);
+        RulesText.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
+            public void onClick(View v) {
                 Rules fragment = new Rules();
                 fragment.setRules(rules);
                 getChildFragmentManager()
@@ -55,20 +54,16 @@ public class Description extends Fragment {
                         .setCustomAnimations(R.anim.slide_up,R.anim.slide_down)
                         .replace(R.id.rules,new Rules())
                         .commit();
-
-                return true;
             }
         });
+
         ImageButton imageButton = view.findViewById(R.id.close);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 relativeLayout.setVisibility(View.GONE);
-                getChildFragmentManager()
-                        .popBackStack();
             }
         });
-
 
         return view;
     }

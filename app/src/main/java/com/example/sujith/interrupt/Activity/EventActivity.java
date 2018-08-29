@@ -1,7 +1,7 @@
 package com.example.sujith.interrupt.Activity;
 
-import android.os.Handler;
-import android.os.Looper;
+import android.app.Activity;
+import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.transition.Fade;
@@ -15,22 +15,18 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sujith.interrupt.Fragment.EventsFrag.Description;
+import com.example.sujith.interrupt.Menu.GridMenuFragment1;
 import com.example.sujith.interrupt.R;
 import com.goka.blurredgridmenu.GridMenu;
 import com.goka.blurredgridmenu.GridMenuFragment;
@@ -55,7 +51,6 @@ public class EventActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private GestureDetector gestureDetector;
     private DotsIndicator dotsIndicator;
-
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -75,7 +70,6 @@ public class EventActivity extends AppCompatActivity {
 
 
 
-
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -83,6 +77,7 @@ public class EventActivity extends AppCompatActivity {
         dotsIndicator.setHorizontalGravity(Gravity.CENTER_HORIZONTAL);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         dotsIndicator.setViewPager(mViewPager);
+        mViewPager.setOffscreenPageLimit(10);
 
         PlaceholderFragment placeholderFragment = new PlaceholderFragment();
         placeholderFragment.view(mViewPager);
@@ -95,6 +90,7 @@ public class EventActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
 
     }
 
@@ -134,8 +130,7 @@ public class EventActivity extends AppCompatActivity {
          */
         private ImageButton button;
         public static final String ARG_SECTION_NUMBER = "section_number";
-        public static int num;
-        private GridMenuFragment mGridMenuFragment;
+        public GridMenuFragment1 mGridMenuFragment;
         private static ViewPager viewPager;
 
         public PlaceholderFragment() {
@@ -148,23 +143,13 @@ public class EventActivity extends AppCompatActivity {
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Fade fade = new Fade();
-            fade.setDuration(500);
-//            Slide slideLeft = new Slide(Gravity.START);
-//            slideLeft.setDuration(600);
-//            Explode explode = new Explode();
-//            explode.setDuration(100);
-//            explode.setStartDelay(0);
+            fade.setDuration(100);
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-//            fragment.setEnterTransition(explode);
-//            fragment.setSharedElementReturnTransition(fade);
             fragment.setArguments(args);
             return fragment;
         }
 
-//        public static void getNumber(int number){
-//            num = number;
-//        }
         public void view(ViewPager mViewPager){
             viewPager = mViewPager;
         }
@@ -177,15 +162,8 @@ public class EventActivity extends AppCompatActivity {
             TextView title = rootView.findViewById(R.id.EventTitle);
             CircleImageView icon = rootView.findViewById(R.id.EventIcon);
             RelativeLayout relativeLayout = rootView.findViewById(R.id.rel2);
-            mGridMenuFragment = GridMenuFragment.newInstance(R.drawable.silicon);
+            mGridMenuFragment = GridMenuFragment1.newInstance(R.drawable.silicon);
             button = rootView.findViewById(R.id.context_menu1);
-//            button.setOnTouchListener(new View.OnTouchListener() {
-//                @Override
-//                public boolean onTouch(View v, MotionEvent event) {
-//                    registerForContextMenu(button);
-//                    return false;
-//                }
-//            });
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -194,15 +172,18 @@ public class EventActivity extends AppCompatActivity {
                     tx.replace(R.id.dummy, mGridMenuFragment);
                     tx.addToBackStack(null);
                     tx.commit();
+
                 }
             });
 
             setupGridMenu();
+
+
+
+
             mGridMenuFragment.setOnClickMenuListener(new GridMenuFragment.OnClickMenuListener() {
                 @Override
                 public void onClickMenu(GridMenu gridMenu, int position) {
-//                    Toast.makeText(getActivity(), "Title:" + gridMenu.getTitle() + ", Position:" + position,
-//                            Toast.LENGTH_SHORT).show();
                     switch (position){
                         case 0: {
                             viewPager.setCurrentItem(0,true);
@@ -309,13 +290,8 @@ public class EventActivity extends AppCompatActivity {
 
             }
 
-//            Bundle bundle = new Bundle();
-//            bundle.putInt(ARG_SECTION_NUMBER,getArguments().getInt(ARG_SECTION_NUMBER));
             return rootView;
         }
-//        public String description(){
-//            return myString;
-//        }
 
         private void setupGridMenu() {
             List<GridMenu> menus = new ArrayList<>();
@@ -335,13 +311,28 @@ public class EventActivity extends AppCompatActivity {
         }
 
 
+        public boolean subFunc() {
+            if (isAdded()) {
+                if (0 == getChildFragmentManager().getBackStackEntryCount()) {
+                    return true;
+                } else {
+                    getChildFragmentManager().popBackStack();
+                    return false;
+                }
+            }
+            Log.d("Tag","Not Working");
+            return true;
+        }
+
+
     }
 
+    PlaceholderFragment placeholderFragment = new PlaceholderFragment();
     @Override
     public void onBackPressed() {
-        if (0 == getSupportFragmentManager().getBackStackEntryCount()) {
+        if(placeholderFragment.subFunc()){
             super.onBackPressed();
-        } else {
+        }else{
             getSupportFragmentManager().popBackStack();
         }
     }

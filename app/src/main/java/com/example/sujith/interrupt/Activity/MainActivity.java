@@ -2,6 +2,7 @@ package com.example.sujith.interrupt.Activity;
 
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.app.Fragment;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -53,9 +55,8 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ImageView imageView = (ImageView) findViewById(R.id.MenuImage);
+        final ImageView imageView = (ImageView) findViewById(R.id.MenuImage);
         imageView.setImageResource(R.drawable.ic_menu_black_24dp);
-
 
         slidingRootNav = new SlidingRootNavBuilder(this)
                 .withToolbarMenuToggle(toolbar)
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 .withSavedState(savedInstanceState)
                 .withMenuLayout(R.layout.menu_left_drawer)
                 .inject();
+
 
         screenIcons = loadScreenIcons();
         screenTitle = loadScreenTitles();

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:focusable="true"
+    android:clickable="true"
     android:id="@+id/rela3">
 
     <RelativeLayout
