@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.transition.Fade;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -82,6 +84,8 @@ public class EventActivity extends AppCompatActivity {
         PlaceholderFragment placeholderFragment = new PlaceholderFragment();
         placeholderFragment.view(mViewPager);
 
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +97,7 @@ public class EventActivity extends AppCompatActivity {
 
 
     }
+
 
 
 
@@ -128,10 +133,11 @@ public class EventActivity extends AppCompatActivity {
          * The fragment argument representing the section number for this
          * fragment.
          */
-        private ImageButton button;
+        private ImageView button;
         public static final String ARG_SECTION_NUMBER = "section_number";
         public GridMenuFragment1 mGridMenuFragment;
         private static ViewPager viewPager;
+
 
         public PlaceholderFragment() {
         }
@@ -149,6 +155,7 @@ public class EventActivity extends AppCompatActivity {
             fragment.setArguments(args);
             return fragment;
         }
+        static Integer count;
 
         public void view(ViewPager mViewPager){
             viewPager = mViewPager;
@@ -164,22 +171,29 @@ public class EventActivity extends AppCompatActivity {
             RelativeLayout relativeLayout = rootView.findViewById(R.id.rel2);
             mGridMenuFragment = GridMenuFragment1.newInstance(R.drawable.silicon);
             button = rootView.findViewById(R.id.context_menu1);
-
+            count = 0;
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FragmentTransaction tx = getChildFragmentManager().beginTransaction();
+                    count=1;
+                    FragmentTransaction tx = getActivity().getSupportFragmentManager().beginTransaction();
                     tx.replace(R.id.dummy, mGridMenuFragment);
+                    tx.show(mGridMenuFragment);
                     tx.addToBackStack(null);
                     tx.commit();
 
+                    viewPager.setCurrentItem(0,true);
+
                 }
             });
+            Log.d("TAG1","Working");
 
-            setupGridMenu();
+            if(count == 0) {
+                Log.d("dog",count.toString());
+                setupGridMenu();
 
-
-
+                count = 1;
+            }
 
             mGridMenuFragment.setOnClickMenuListener(new GridMenuFragment.OnClickMenuListener() {
                 @Override
@@ -187,46 +201,57 @@ public class EventActivity extends AppCompatActivity {
                     switch (position){
                         case 0: {
                             viewPager.setCurrentItem(0,true);
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(mGridMenuFragment).commit();
                             break;
                         }
                         case 1: {
                             viewPager.setCurrentItem(1,true);
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(mGridMenuFragment).commit();
                             break;
                         }
                         case 2:{
                             viewPager.setCurrentItem(2,true);
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(mGridMenuFragment).commit();
                             break;
                         }
                         case 3:{
                             viewPager.setCurrentItem(3,true);
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(mGridMenuFragment).commit();
                             break;
                         }
                         case 4:{
                             viewPager.setCurrentItem(4,true);
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(mGridMenuFragment).commit();
                             break;
                         }
                         case 5:{
                             viewPager.setCurrentItem(5,true);
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(mGridMenuFragment).commit();
                             break;
                         }
                         case 6:{
                             viewPager.setCurrentItem(6,true);
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(mGridMenuFragment).commit();
                             break;
                         }
                         case 7:{
                             viewPager.setCurrentItem(7,true);
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(mGridMenuFragment).commit();
                             break;
                         }
                         case 8:{
                             viewPager.setCurrentItem(8,true);
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(mGridMenuFragment).commit();
                             break;
                         }
                         case 9:{
                             viewPager.setCurrentItem(9,true);
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(mGridMenuFragment).commit();
                             break;
                         }
                         case 10:{
                             viewPager.setCurrentItem(10,true);
+                            getActivity().getSupportFragmentManager().beginTransaction().remove(mGridMenuFragment).commit();
                             break;
                         }
                     }
@@ -292,8 +317,8 @@ public class EventActivity extends AppCompatActivity {
 
             return rootView;
         }
+        public void setupGridMenu() {
 
-        private void setupGridMenu() {
             List<GridMenu> menus = new ArrayList<>();
             menus.add(new GridMenu("Pitch Perfect", R.drawable.ic_event_note_black_24dp));
             menus.add(new GridMenu("Event 2", R.drawable.ic_event_note_black_24dp));
@@ -307,8 +332,12 @@ public class EventActivity extends AppCompatActivity {
             menus.add(new GridMenu("Event 10", R.drawable.ic_event_note_black_24dp));
             menus.add(new GridMenu("Event 11", R.drawable.ic_event_note_black_24dp));
 
-            mGridMenuFragment.setupMenu(menus);
+                mGridMenuFragment.setupMenu(menus);
+                setHasOptionsMenu(true);
+
+//            menus.clear();
         }
+
 
 
         public boolean subFunc() {
@@ -407,7 +436,7 @@ public class EventActivity extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);

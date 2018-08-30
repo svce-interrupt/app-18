@@ -21,6 +21,7 @@ import java.util.List;
 public class GridMenuFragment1 extends Fragment implements AdapterView.OnItemClickListener {
 
     private static final String KEY_BG_RESOURCE_ID = "key_bg_resource_id";
+    static Integer count = 0;
 
     public static GridMenuFragment1 newInstance(int backgroundResourceID) {
         GridMenuFragment1 gridMenuFragment1 = new GridMenuFragment1();
@@ -50,6 +51,9 @@ public class GridMenuFragment1 extends Fragment implements AdapterView.OnItemCli
         blurringView.setBlurredView(backgroundView);
 
         GridView gridView = (GridView) view.findViewById(R.id.menu_grid_view1);
+
+
+        mGridMenuAdapter.clear();
         mGridMenuAdapter.addAll(this.mMenus);
         gridView.setAdapter(mGridMenuAdapter);
         gridView.setOnItemClickListener(this);
@@ -59,7 +63,7 @@ public class GridMenuFragment1 extends Fragment implements AdapterView.OnItemCli
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                relativeLayout.setVisibility(View.GONE);
+                getActivity().getSupportFragmentManager().beginTransaction().remove(GridMenuFragment1.this).commit();
             }
         });
         return view;
@@ -76,6 +80,17 @@ public class GridMenuFragment1 extends Fragment implements AdapterView.OnItemCli
 
     public void setupMenu(List<GridMenu> menus) {
         this.mMenus = menus;
+//        mMenus.add(new GridMenu("Pitch Perfect", R.drawable.ic_event_note_black_24dp));
+//        mMenus.add(new GridMenu("Event 2", R.drawable.ic_event_note_black_24dp));
+//        mMenus.add(new GridMenu("Event 3", R.drawable.ic_event_note_black_24dp));
+//        mMenus.add(new GridMenu("Event 4", R.drawable.ic_event_note_black_24dp));
+//        mMenus.add(new GridMenu("Event 5", R.drawable.ic_event_note_black_24dp));
+//        mMenus.add(new GridMenu("Event 6", R.drawable.ic_event_note_black_24dp));
+//        mMenus.add(new GridMenu("Event 7", R.drawable.ic_event_note_black_24dp));
+//        mMenus.add(new GridMenu("Event 8", R.drawable.ic_event_note_black_24dp));
+//        mMenus.add(new GridMenu("Event 9", R.drawable.ic_event_note_black_24dp));
+//        mMenus.add(new GridMenu("Event 10", R.drawable.ic_event_note_black_24dp));
+//        mMenus.add(new GridMenu("Event 11", R.drawable.ic_event_note_black_24dp));
     }
 
     private GridMenuAdapter mGridMenuAdapter;
